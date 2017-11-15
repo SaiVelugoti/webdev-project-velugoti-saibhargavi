@@ -2431,7 +2431,7 @@ var EventService = (function () {
     }
     EventService.prototype.findEventsByLocation = function (location) {
         // const url = 'http://eventful.com/events?l=' + location;
-        var url = 'http://api.eventful.com/json/events/search?location=' + location + '&app_key=MkD6G4ptdWk8dbPr';
+        var url = 'https://api.eventful.com/json/events/search?location=' + location + '&app_key=MkD6G4ptdWk8dbPr';
         return this._http.get(url).map(function (response) {
             return response.json();
         });
