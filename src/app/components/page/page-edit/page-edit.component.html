@@ -1,0 +1,100 @@
+<nav class="navbar navbar-fixed-top bg-primary btnStyle">
+  <div class="container-fluid">
+    <div class="navbar-header header-width header-fix">
+      <p class="navbar-text pull-left p-fix">
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page']"
+           class="navbar-link glyphicon-color">
+          <span class="glyphicon glyphicon-chevron-left">
+          </span>
+        </a>
+      </p>
+
+      <span class="navbar-brand">Edit Page</span>
+      <p class="navbar-text pull-right  p-right-fix">
+        <a (click)="updatePage()" class="navbar-link glyphicon-color">
+          <span class="glyphicon glyphicon-ok">
+          </span>
+        </a>
+      </p>
+    </div>
+  </div>
+</nav>
+<form (ngSubmit)="updatePage()" #f="ngForm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 visible-lg">
+        <ul class="list-group">
+          <li class="list-group-item active btnStyle">
+            <div class="row">
+              <div class="col-lg-9  visible-lg">
+                Pages
+              </div>
+
+              <div class="col-xs-3">
+                <a [routerLink]="['/user', userId, 'website', websiteId, 'page', 'new']"
+                   class="glyphicon-color pull-right">
+              <span class="glyphicon glyphicon-plus">
+              </span>
+                </a>
+              </div>
+            </div>
+          </li>
+
+          <li class="list-group-item" *ngFor="let page of pages">
+            <div class="row">
+              <div class="col-lg-9  visible-lg">
+                <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']">
+                  {{page['name']}}
+                </a>
+              </div>
+
+              <div class="col-xs-3">
+                <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId]">
+              <span class="glyphicon glyphicon-cog pull-right">
+              </span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-9 col-xs-12">
+          <div *ngIf="errorFlag"
+               class="alert alert-danger">
+            {{errorMsg}}
+          </div>
+          <label for="pageName">Name</label>
+          <input [(ngModel)]="pageName"
+                 placeholder={{pageName}}
+                 name="pageName"
+                 type="text"
+                 id="pageName"
+                 class="form-control"/>
+
+          <label for="description">Description</label>
+          <input [(ngModel)]="description"
+                 placeholder={{description}}
+                 name="description"
+                 type="text"
+                 id="description"
+                 class="form-control"/>
+          <button class="btn btn-danger btn-block "
+                  (click)='deletePage()'>Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<nav class="navbar navbar-fixed-bottom bg-primary btnStyle">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]" class="navbar-link glyphicon-color">
+        <span class="glyphicon glyphicon-user">
+        </span>
+      </a>
+    </p>
+  </div>
+</nav>

@@ -1,0 +1,26 @@
+
+<div class="container-fluid">
+
+  <label for="location">Location</label>
+  <input [(ngModel)]="location"
+         name="location"
+         id="location"
+         placeholder="Example: San Diego"
+         class="form-control">
+<button
+  (click)="searchEvents(location)"
+        class="btn btn-primary btn-block">Get Events</button>
+
+  <div *ngIf="eventsExists">
+    <li class="list-group-item" *ngFor="let eventFromList of eventsFound">
+      <div class="row">
+        <div class="col-lg-5 col-md-9 col-xs-9">
+          <!--<a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageFromList['_id'], 'widget']">-->
+          {{eventFromList['title']}}<br/>
+            {{eventFromList['url']}}
+          <!--</a>-->
+        </div>
+      </div>
+    </li>
+  </div>
+</div>

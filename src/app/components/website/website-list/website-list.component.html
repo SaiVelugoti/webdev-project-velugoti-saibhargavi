@@ -1,0 +1,76 @@
+<nav class="navbar navbar-fixed-top bg-primary btnStyle">
+  <div class="container-fluid">
+
+    <div class="navbar-header header-width header-fix">
+      <p class="navbar-text pull-left p-fix">
+        <a [routerLink]="['/user/', userId]" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-chevron-left">
+              </span>
+        </a>
+      </p>
+      <span class="navbar-brand glyphicon-color">Websites</span>
+
+      <p class="navbar-text pull-right p-right-fix">
+        <a [routerLink]="['/user', userId, 'website', 'new']" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-plus">
+              </span>
+        </a>
+      </p>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <ul class="list-group">
+    <li class="list-group-item active btnStyle">
+      <div class="row">
+        <div class="col-lg-5 col-md-9 col-xs-9">
+          Name
+        </div>
+
+        <div class="col-lg-4 visible-lg">
+          Description
+        </div>
+
+        <div class="col-xs-3">
+
+        </div>
+
+      </div>
+    </li>
+
+
+    <li class="list-group-item" *ngFor="let websitefromList of websites">
+      <div class="row">
+        <div class="col-lg-5 col-md-9 col-xs-9">
+          <a [routerLink]="['/user', userId, 'website', websitefromList['_id'], 'page']">
+            {{websitefromList['name']}}
+          </a>
+        </div>
+        <div class="col-lg-4 visible-lg">
+          {{websitefromList['description']}}
+        </div>
+
+        <div class="col-xs-3">
+          <a [routerLink]="['/user', userId, 'website', websitefromList['_id']]">
+              <span class="glyphicon glyphicon-cog pull-right">
+              </span>
+          </a>
+        </div>
+
+      </div>
+    </li>
+  </ul>
+</div>
+
+<nav class="navbar navbar-fixed-bottom bg-primary btnStyle">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]" class="navbar-link glyphicon-color">
+        <span class="glyphicon glyphicon-user">
+        </span>
+      </a>
+    </p>
+  </div>
+
+</nav>

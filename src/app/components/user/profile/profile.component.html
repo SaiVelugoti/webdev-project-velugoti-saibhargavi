@@ -1,0 +1,58 @@
+<nav class="navbar navbar-fixed-top bg-primary ">
+  <div class="container-fluid btnStyle">
+    <div class="navbar-header header-width header-fix">
+
+      <span class="navbar-brand">Profile</span>
+      <p class="navbar-text pull-right p-fix">
+        <a (click)="updateUser()" class="navbar-link glyphicon-color ">
+                <span class="glyphicon glyphicon-ok">
+                </span>
+        </a>
+      </p>
+    </div>
+
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <label for="username">Username</label>
+  <input [(ngModel)]="username"
+         name="username"
+         id="username"
+         placeholder={{username}}
+         class="form-control"
+         readonly>
+
+  <label for="firstName">First Name</label>
+  <input [(ngModel)]="firstName"
+         name="firstname"
+         id="firstName"
+         placeholder={{firstName}}
+         class="form-control">
+
+  <label for="lastName">Last Name</label>
+  <input [(ngModel)]="lastName"
+         name="lastname"
+         id="lastName"
+         placeholder={{lastName}}
+         class="form-control">
+
+  <a [routerLink]="['/user', userId, 'website']" class="btn btn-block bg-primary btnStyle">
+    Websites
+  </a>
+  <a [routerLink]="['/login']" class="btn btn-block btn-danger">
+    Logout
+  </a>
+</div>
+
+<nav class="navbar navbar-fixed-bottom bg-primary btnStyle">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]" class="navbar-link glyphicon-color">
+                <span class="glyphicon glyphicon-user">
+                </span>
+      </a>
+    </p>
+  </div>
+</nav>

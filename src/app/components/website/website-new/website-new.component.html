@@ -1,0 +1,109 @@
+<nav class="navbar navbar-fixed-top bg-primary btnStyle">
+  <div class="container-fluid">
+    <div class="navbar-header  header-width header-fix">
+      <p class="navbar-text pull-left p-fix">
+        <a [routerLink]="['/user', userId, 'website']" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-chevron-left">
+              </span>
+        </a>
+      </p>
+
+      <span class="navbar-brand">New Website</span>
+      <p class="navbar-text pull-right p-right-fix">
+        <a (click)="createWebsite()" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-ok">
+              </span>
+        </a>
+      </p>
+    </div>
+
+  </div>
+</nav>
+
+<form (ngSubmit)="createWebsite()" #f="ngForm">
+  <div class="container-fluid ">
+    <div class="row">
+      <div class="col-lg-3 visible-lg">
+        <ul class="list-group">
+          <li class="list-group-item active btnStyle">
+            <div class="row">
+              <div class="col-lg-9  visible-lg">
+                Websites
+              </div>
+              <div class="col-xs-3">
+                <a [routerLink]="['/user', userId, 'website', 'new']" class="glyphicon-color pull-right">
+              <span class="glyphicon glyphicon-plus">
+              </span>
+                </a>
+              </div>
+
+            </div>
+          </li>
+
+          <li class="list-group-item" *ngFor="let website of websites">
+            <div class="row">
+              <div class="col-lg-9  visible-lg">
+                <a [routerLink]="['/user', userId, 'website', website['_id'], 'page']">
+                  {{website['name']}}
+                </a>
+              </div>
+
+              <div class="col-xs-3">
+                <a [routerLink]="['/user', userId, 'website', website['_id']]">
+              <span class="glyphicon glyphicon-cog pull-right">
+              </span>
+                </a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-12 col-lg-9">
+          <div class="container-fluid">
+            <div *ngIf="errorFlag"
+                 class="alert alert-danger">
+              {{errorMsg}}
+            </div>
+            <label for="websiteName">Name</label>
+            <input placeholder="Website Name"
+                   name="websiteName"
+                   type="text"
+                   id="websiteName"
+                   class="form-control"
+                   ngModel
+                   required
+                   #websiteName="ngModel"/>
+            <span class="help-block" *ngIf="!websiteName.valid && websiteName.touched">
+            Please enter Website Name!
+            </span>
+            <label for="webDescription">Description</label>
+            <textarea
+              rows="5"
+              placeholder="Enter description for your website"
+              name="webDescription"
+              id="webDescription"
+              class="form-control"
+              ngModel
+              required
+              #webDescription="ngModel">{{webDescription}}</textarea>
+            <span class="help-block" *ngIf="!webDescription.valid && webDescription.touched">
+            Please describe your website!
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<nav class="navbar navbar-fixed-bottom btnStyle">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-user">
+              </span>
+      </a>
+    </p>
+  </div>
+</nav>

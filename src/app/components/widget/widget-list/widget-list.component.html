@@ -1,0 +1,154 @@
+<nav class="navbar navbar-fixed-top bg-primary btnStyle">
+  <div class="container-fluid">
+    <div class="navbar-header header-width header-fix">
+      <p class="navbar-text pull-left p-fix">
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page']" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-chevron-left">
+              </span>
+        </a>
+      </p>
+
+      <span class="navbar-brand">Widgets</span>
+      <p class="navbar-text pull-right p-right-fix ">
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', 'new']"
+           class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-plus">
+              </span>
+        </a>
+      </p>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container-fluid">
+
+  <div *ngFor="let widgetFromList of widgets" class="widget-container ">
+    <!--<div class="wd-widget">-->
+    <!--<div class="wd-widget-toolbar">-->
+    <!--<a-->
+    <!--[routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetFromList['_id'], widgetFromList['widgetType']]">-->
+    <!--<span class="glyphicon glyphicon-cog"></span>-->
+    <!--</a>-->
+    <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <div [ngSwitch]="widgetFromList['widgetType']">
+      <div *ngSwitchCase="'HEADING'">
+        <div class="container-fluid">
+          <div class="wd-widget">
+            <div class="wd-widget-toolbar">
+              <a
+                [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetFromList['_id'], widgetFromList['widgetType']]">
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>
+              <span class="glyphicon glyphicon-align-justify"></span>
+            </div>
+            <div [ngSwitch]="widgetFromList['size']">
+              <div *ngSwitchCase="'1'">
+                <h1>{{widgetFromList['text']}}</h1>
+              </div>
+              <div *ngSwitchCase="'2'">
+                <h2>{{widgetFromList['text']}}</h2>
+              </div>
+              <div *ngSwitchCase="'3'">
+                <h3>{{widgetFromList['text']}}</h3>
+              </div>
+              <div *ngSwitchCase="'4'">
+                <h4>{{widgetFromList['text']}}</h4>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'YOUTUBE'" class="youtube-widget">
+        <div class="container-fluid">
+          <div class="wd-widget">
+            <div class="video-container">
+              <iframe [style.width]="widgetFromList['width']" [src]="cleanURL(widgetFromList['url'])" frameborder="0"
+                      allowfullscreen></iframe>
+              <div class="wd-widget-toolbar toolbar-youtube-position">
+                <a
+                  [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetFromList['_id'], widgetFromList['widgetType']]">
+                  <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                <span class="glyphicon glyphicon-align-justify"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'IMAGE'">
+        <div class="container-fluid">
+          <div class="wd-widget">
+            <div class="wd-widget-toolbar">
+              <a
+                [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetFromList['_id'], widgetFromList['widgetType']]">
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>
+              <span class="glyphicon glyphicon-align-justify"></span>
+            </div>
+            <img src="{{widgetFromList['url']}}" [style.width]="widgetFromList['width']"/>
+          </div>
+
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'HTML'">
+        <div class="container-fluid">
+          <div class="wd-widget">
+            <div class="wd-widget-toolbar">
+              <a
+                [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetFromList['_id'], widgetFromList['widgetType']]">
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>
+              <span class="glyphicon glyphicon-align-justify"></span>
+            </div>
+            <div innerHTML="{{widgetFromList['text']}}">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngSwitchCase="'TEXT'">
+        <div class="container-fluid">
+          <div class="wd-widget">
+            <div class="wd-widget-toolbar">
+              <a
+                [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widgetFromList['_id'], widgetFromList['widgetType']]">
+                <span class="glyphicon glyphicon-cog"></span>
+              </a>
+              <span class="glyphicon glyphicon-align-justify"></span>
+            </div>
+            <div *ngIf="widgetFromList['formatted']">
+              <quill-editor [(ngModel)]="widgetFromList['text']" name="text"></quill-editor>
+            </div>
+            <input *ngIf="!widgetFromList['formatted'] && (!widgetFromList.rows || widgetFromList['rows']===1)"
+                   placeholder="{{widgetFromList['placeholder']}}" class="form-control"/>
+
+            <textarea *ngIf="!widgetFromList['formatted'] && (widgetFromList['rows'] > 1)"
+                      rows="{{widgetFromList['rows']}}" placeholder="{{widgetFromList['placeholder']}}"
+                      class="form-control">{{widgetFromList['text']}}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<nav class="navbar navbar-fixed-bottom bg-primary btnStyle">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]" class="navbar-link glyphicon-color">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </p>
+  </div>
+</nav>

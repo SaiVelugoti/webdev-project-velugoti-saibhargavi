@@ -1,0 +1,71 @@
+<nav class="navbar navbar-fixed-top bg-primary btnStyle">
+  <div class="container-fluid">
+    <div class="navbar-header header-width header-fix">
+      <p class="navbar-text pull-left p-fix">
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']"
+           class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-chevron-left">
+              </span>
+        </a>
+      </p>
+
+      <span class="navbar-brand">Widget Edit</span>
+      <p class="navbar-text pull-right p-right-fix">
+        <a (click)="createEditYoutube()" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-ok">
+              </span>
+        </a>
+      </p>
+    </div>
+
+  </div>
+</nav>
+
+
+<form (ngSubmit)="createEditYoutube()" #f="ngForm">
+  <div class="container-fluid">
+
+    <label for="name">Name</label>
+    <input [(ngModel)]="name"
+           placeholder="VideoName"
+           value={{name}}
+           type="text"
+           id="name"
+           name="name"
+           class="form-control"
+    />
+    <label for="url">URL</label>
+    <input [(ngModel)]="url"
+           placeholder="https://www.youtube.com/embed/mu5vRI13bGc"
+           value={{url}}
+           type="text"
+           id="url"
+           name="url"
+           class="form-control"
+    />
+    <label for="width">Width</label>
+    <input [(ngModel)]="width"
+           placeholder="80%"
+           value={{width}}
+           type="text"
+           id="width"
+           name="width"
+           class="form-control"/>
+    <div *ngIf=widgetExists>
+      <button class="btn btn-danger btn-block "
+              (click)='deleteWidget()'>Delete
+      </button>
+    </div>
+  </div>
+</form>
+
+<nav class="navbar navbar-fixed-bottom btnStyle">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-user">
+              </span>
+      </a>
+    </p>
+  </div>
+</nav>

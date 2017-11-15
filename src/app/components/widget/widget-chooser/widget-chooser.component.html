@@ -1,0 +1,51 @@
+<nav class="navbar navbar-fixed-top bg-primary btnStyle">
+  <div class="container-fluid btnStyle">
+    <div class="navbar-header header-width header-fix">
+      <p class="navbar-text pull-left p-fix">
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']"
+           class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-chevron-left">
+              </span>
+        </a>
+      </p>
+
+      <span class="navbar-brand">Choose Widget</span>
+      <p class="navbar-text pull-right p-right-fix">
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget']"
+           class="navbar-link glyphicon-color">
+
+        </a>
+      </p>
+    </div>
+
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+  <ul class="list-group">
+    <li class="list-group-item"><a
+      [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', newWid, 'HEADING']">Heading</a>
+    </li>
+    <li class="list-group-item"><a
+      [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', newWid, 'IMAGE']">Image</a></li>
+    <li class="list-group-item"><a
+      [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', newWid, 'YOUTUBE']">YouTube</a>
+    </li>
+    <li class="list-group-item"><a
+      [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', newWid, 'TEXT']">Text</a></li>
+    <li class="list-group-item"><a
+      [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', newWid, 'HTML']">HTML</a></li>
+  </ul>
+</div>
+
+<nav class="navbar navbar-fixed-bottom bg-primary btnStyle">
+  <div class="container-fluid">
+    <p class="navbar-text pull-right">
+      <a [routerLink]="['/user', userId]" class="navbar-link glyphicon-color">
+              <span class="glyphicon glyphicon-user">
+              </span>
+      </a>
+    </p>
+  </div>
+</nav>
