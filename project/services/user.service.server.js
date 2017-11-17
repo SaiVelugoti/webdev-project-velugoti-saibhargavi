@@ -7,8 +7,8 @@ module.exports = function (app) {
   app.get("/api/user/:userId", findUserById);
   app.put("/api/user/:userId", updateUser);
   app.delete("/api/user/:userId", deleteUser);
-  app.post("/api/user/:userId/following/:followingId", addToFollowList);
-  app.get("/api/user/' + userId + '/dashboard/followedBy", findUsersFollowedBy);
+  app.put("/api/user/:userId/following/:followingId", addToFollowList);
+  app.get("/api/user/:userId/dashboard/followedBy", findUsersFollowedBy);
   app.get("/api/user/:userId/dashboard/following", findUsersFollowing);
   app.get("/api/users/", findAllUsers);
 
@@ -21,15 +21,15 @@ module.exports = function (app) {
   }
 
   function findUsersFollowing(req, res) {
-    var userId = req.query["userId"];
-    return userModel.findUsersFollowing(userId)
-      .then(function (users) {
-        res.json(users);
+    var userId = req.params["userId"];
+    return userModel.findUserById(userId)
+      .then(function (user) {
+        res.json(user);
 
       });
   }
   function findUsersFollowedBy(req, res) {
-    var userId = req.query["userId"];
+    var userId = req.params["userId"];
     return userModel.findUsersFollowedBy(userId)
       .then(function (users) {
         res.json(users);
@@ -37,9 +37,9 @@ module.exports = function (app) {
       });
   }
   function addToFollowList(req, res) {
-    var followingId = req.query["followingId"];
-    var userId = req.query["userId"];
-    userModel.addToFollow(userId, followingId)
+    var followingId = req.params["followingId"];
+    var userId = req.params["userId"];
+   return userModel.addToFollow(userId, followingId)
       .then(function (user) {
         res.json(user);
       });
@@ -47,10 +47,13 @@ module.exports = function (app) {
   }
 
   function findAllUsers(req, res) {
+    console.log("In findAllUsers - UserService")
     userModel.findAll()
       .then(function (users) {
         if (users) {
           res.json(users);
+        } else {
+          res.json(null);
         }
 
       });

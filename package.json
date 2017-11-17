@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/schematics": "0.0.34",
     "@angular/animations": "^4.0.0",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
@@ -24,7 +25,6 @@
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "core-js": "^2.4.1",
-    "cors": "^2.8.4",
     "express": "^4.15.3",
     "express-session": "^1.15.6",
     "http": "0.0.0",

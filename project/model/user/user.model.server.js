@@ -52,23 +52,44 @@ function deleteUser(userId) {
 }
 
 function addToFollow(userId, followingId) {
-  var currentUserId = userId;
-  var newFollowing = followingId;
-  UserModel.findUserById(currentUserId)
-    .then(function (user) {
-      UserModel.findUserById(newFollowing)
-        .then(function (followingUser) {
-          user.followingUsers.push(followingUser);
-           user.save();
-        });
-    });
-  UserModel.findUserById(newFollowing)
-    .then(function (user) {
-      UserModel.findUserById(currentUserId)
-        .then(function (thisUser) {
-          user.followedBy.push(thisUser);
-           user.save();
-        });
-    });
-  return;
+  return UserModel.update({_id: userId}, {$push: {followingUsers: followingId}});
 }
+
+function addFollowers(userId, followedById) {
+  "use strict";
+  return UserModel.update({_is: userId}, {$push: {followedBy: followedById}});
+}
+  // UserModel.update({_id:followingId}, {$push: {followedBy: userId}});
+  // return;
+  // var currentUserId = userId;
+  // var newFollowing = followingId;
+  // var existingUser;
+  // var followingUser;
+  // UserModel.findUserById(currentUserId)
+  //   .then(function (user) {
+  //     console.log("In User Model Server")
+  //     existingUser=user;
+  //     console.log("existingUser" + existingUser);
+  //     UserModel.findUserById(newFollowing)
+  //       .then(function (usernew) {
+  //         followingUser=usernew;
+  //         console.log("followingUser"+followingUser);
+  //         existingUser.followingUsers.push(followingUser);
+  //         // UserModel.update({_id:currentUserId}, {$push: {followingUsers: followingUser._id}});
+  //         existingUser.save();
+  //         followingUser.followedBy.push(existingUser);
+  //         // UserModel.updateOne({_id:newFollowing}, {$addToSet: {followedBy: currentUserId}});
+  //         followingUser.save();
+  //       });
+  //   });
+  //
+  //  return UserModel.findOne({_id: userId});
+  // UserModel.findUserById(newFollowing)
+  //   .then(function (user) {
+  //     UserModel.findUserById(currentUserId)
+  //       .then(function (thisUser) {
+  //         user.followedBy.push(thisUser);
+  //          user.save();
+  //       });
+  //   });
+  // return;

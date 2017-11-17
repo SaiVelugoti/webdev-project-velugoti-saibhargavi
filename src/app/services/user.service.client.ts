@@ -17,6 +17,7 @@ export class UserService {
   findUsers() {
     const url = this.baseUrl + '/api/users/';
     return this._http.get(url).map((response: Response) => {
+      return response.json();
     });
   }
 
@@ -35,8 +36,8 @@ export class UserService {
   }
 
   addUserToFollow(userId, followingId) {
-    const url = this.baseUrl + '/api/user/' + userId + 'following' + followingId;
-    return this._http.post(url, followingId).map((response, Response) => {
+    const url = this.baseUrl + '/api/user/' + userId + '/following/' + followingId;
+    return this._http.put(url, followingId).map((response, Response) => {
       return response.json();
     });
   }

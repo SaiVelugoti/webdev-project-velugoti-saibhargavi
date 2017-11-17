@@ -22,7 +22,7 @@ export class EventService {
 
 
   findEventsByLocation(location) {
-    const apiKey = 'MkD6G4ptdWk8dbPr';
+    const apiKey = environment.api_Key;
     // if (process.env.API_KEY_EVENTFUL) {
     //   apiKey = process.env.API_KEY_EVENTFUL;
     // }

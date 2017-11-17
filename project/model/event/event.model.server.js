@@ -5,6 +5,7 @@ var UserModel = require("../user/user.model.server");
 
 EventModel.addEvent = addEvent;
 EventModel.deleteEvent = deleteEvent;
+EventModel.findEventsForUser = findEventsForUser;
 
 module.exports = EventModel;
 
@@ -20,6 +21,10 @@ function  addEvent(userId, event) {
           return user.save();
         });
     });
+}
+
+function findEventsForUser(userId) {
+  return UserModel.find({regUserId: userId});
 }
 
 function deleteEvent(eventId){

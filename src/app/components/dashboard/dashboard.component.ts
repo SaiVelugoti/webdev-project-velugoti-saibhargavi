@@ -26,9 +26,12 @@ export class DashboardComponent implements OnInit {
         this.userService.findUserById(this.regUserId).subscribe((user: any) => {
           this.followedBy = user.followedBy;
         });
-        this.userService.findUserById(this.regUserId).subscribe((user: any) => {
-          this.usersFollowing = user.followingUsers;
+        this.userService.findUserById(this.regUserId).subscribe((users: any) => {
+          this.usersFollowing = users.followingUsers;
         });
+      this.userService.findUsers().subscribe((users: any) => {
+        this.otherUsers = users;
+      });
         this.eventService.findEventsInterested(this.regUserId).subscribe((eventsInterestedIn: any) => {
           this.eventsInterestedIn = eventsInterestedIn;
         });
@@ -41,6 +44,6 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/user', this.regUserId, 'dashboard']);
       }
     );
-
+    this.router.navigate(['/user', this.regUserId, 'dashboard']);
   }
 }
