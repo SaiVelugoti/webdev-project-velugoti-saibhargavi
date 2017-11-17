@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2">
+      <ul class="list-group">
+        <li class="list-group-item active btnStyle">
+          <div class="row">
+            <div class="col-lg-2">
+              Followed By
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" *ngFor="let followedByUser of followedBy">
+        <div class="row">
+          <div class="col-lg-3">
+            <!--<a [routerLink]="['/user']"-->
+            {{followedByUser.name}}
+          </div>
+        </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-lg-2">
+      <ul class="list-group">
+        <li class="list-group-item active btnStyle">
+          <div class="row">
+            <div class="col-lg-2">
+              Users you Follow
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" *ngFor="let followingUser of usersFollowing">
+          <div class="row">
+            <div class="col-lg-3">
+              <!--<a [routerLink]="['/user']"-->
+              {{followingUser.name}}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-lg-3">
+      <ul class="list-group">
+        <li class="list-group-item active btnStyle">
+          <div class="row">
+            <div class="col-lg-2">
+              Other Users
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" *ngFor="let otherUser of otherUsers">
+          <div class="row">
+            <div class="col-lg-2">
+              <!--<a [routerLink]="['/user']"-->
+              {{otherUser.name}}
+            </div>
+            <div class="col-lg-1">
+              <a (click)="addToFollow(otherUser._id)" class="nav">
+                <span class="glyphicon glyphicon-cog pull-right">
+
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-lg-5">
+      <ul class="list-group">
+        <li class="list-group-item active btnStyle">
+          <div class="row">
+            <div class="col-lg-2">
+              Interested Events
+            </div>
+          </div>
+        </li>
+        <li class="list-group-item" *ngFor="let interestedEvent of eventsInterestedIn">
+          <div class="row">
+            <div class="col-lg-3">
+              <!--<a [routerLink]="['/user']"-->
+              {{interestedEvent.eventName}}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <a [routerLink] = "['/user', regUserId, 'events']" class="btn btn-block btn-primary btnStyle">
+    Search Events
+  </a>
+  <a [routerLink] = "['/login']" class="btn btn-block btn-danger">
+    Logout
+  </a>
+</div>

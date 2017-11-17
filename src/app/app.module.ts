@@ -34,6 +34,8 @@ import { WidgetHtmlComponent } from './components/widget/widget-edit/widget-html
 import { WidgetTextComponent } from './components/widget/widget-edit/widget-text/widget-text.component';
 import { EventPageComponent} from './components/eventpage/eventpage.component';
 import {EventService} from './services/event.service.client';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 
 @NgModule({
   // Declare components here
@@ -59,7 +61,8 @@ import {EventService} from './services/event.service.client';
     WidgetYoutubeComponent,
     WidgetHtmlComponent,
     WidgetTextComponent,
-    EventPageComponent
+    EventPageComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

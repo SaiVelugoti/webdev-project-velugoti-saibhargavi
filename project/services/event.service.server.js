@@ -1,6 +1,7 @@
 module.exports = function (app) {
 
   app.get("/api/events/location/:location", getEventsByLocation);
+  app.get("/api/user/:userId/dashboard/intrstEvents", findInterestedEvents);
 
   function getEventsByLocation(req, res) {
     const location = req.params['location'];
@@ -15,6 +16,12 @@ module.exports = function (app) {
     Http.get(url).then( function (retrievedevents) {
       res.json(retrievedevents);
     });
+  }
+
+  function findInterestedEvents() {
+    const userId = req.params['userId'];
+
+
   }
 }
 

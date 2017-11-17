@@ -20,6 +20,28 @@ export class UserService {
     });
   }
 
+  findUsersFollowing(userId) {
+    const url = this.baseUrl + '/api/user/' + userId + '/dashboard/following';
+    return this._http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+  findUserFollowedBy(userId) {
+    const url = this.baseUrl + '/api/user/' + userId + '/dashboard/followedBy';
+    return this._http.get(url).map((respoonse: Response) => {
+      return respoonse.json();
+    });
+  }
+
+  addUserToFollow(userId, followingId) {
+    const url = this.baseUrl + '/api/user/' + userId + 'following' + followingId;
+    return this._http.post(url, followingId).map((response, Response) => {
+      return response.json();
+    });
+  }
+
+
   // Asgn 6
   register(username, password) {
     const url = 'http://localhost:3100/api/register';

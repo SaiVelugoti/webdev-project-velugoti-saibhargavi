@@ -11,12 +11,14 @@ export class EventPageComponent implements OnInit {
   location: string;
   eventsFound: [{}];
   eventsExists: boolean;
+  noEventsRetrieved: boolean;
 
   constructor(private eventService: EventService) {
   }
 
   ngOnInit() {
     this.eventsExists = false;
+    this.noEventsRetrieved = false;
   }
 
   searchEvents() {
@@ -29,9 +31,15 @@ export class EventPageComponent implements OnInit {
             console.log(eventsForLoc.events.event);
             this.eventsFound = eventsForLoc.events.event;
             console.log(eventsForLoc['events']);
+          } else {
+            this.noEventsRetrieved = true;
           }
         }
       );
 
   }
+
+  // addEventAsInterested(){
+  //
+  // }
 }

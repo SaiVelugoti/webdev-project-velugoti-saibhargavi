@@ -12,6 +12,15 @@ export class EventService {
   constructor(private _http: Http) {
   }
 
+
+  findEventsInterested(userId) {
+    const url = this.baseUrl + '/api/user/' + userId + '/dashboard/intrstEvents';
+    return this._http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
+
+
   findEventsByLocation(location) {
     const apiKey = 'MkD6G4ptdWk8dbPr';
     // if (process.env.API_KEY_EVENTFUL) {

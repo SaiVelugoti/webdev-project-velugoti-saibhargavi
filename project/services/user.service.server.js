@@ -7,6 +7,10 @@ module.exports = function (app) {
   app.get("/api/user/:userId", findUserById);
   app.put("/api/user/:userId", updateUser);
   app.delete("/api/user/:userId", deleteUser);
+  app.post("/api/user/:userId/following/:followingId", addToFollowList);
+  app.get("/api/user/' + userId + '/dashboard/followedBy", findUsersFollowedBy);
+  app.get("/api/user/:userId/dashboard/following", findUsersFollowing);
+  app.get("/api/users/", findAllUsers);
 
   function createUser(req, res) {
     var newUser = req.body;
@@ -14,6 +18,44 @@ module.exports = function (app) {
       .then(function (user) {
         res.json(user);
       });
+  }
+
+  function findUsersFollowing(req, res) {
+    var userId = req.query["userId"];
+    return userModel.findUsersFollowing(userId)
+      .then(function (users) {
+        res.json(users);
+
+      });
+  }
+  function findUsersFollowedBy(req, res) {
+    var userId = req.query["userId"];
+    return userModel.findUsersFollowedBy(userId)
+      .then(function (users) {
+        res.json(users);
+
+      });
+  }
+  function addToFollowList(req, res) {
+    var followingId = req.query["followingId"];
+    var userId = req.query["userId"];
+    userModel.addToFollow(userId, followingId)
+      .then(function (user) {
+        res.json(user);
+      });
+
+  }
+
+  function findAllUsers(req, res) {
+    userModel.findAll()
+      .then(function (users) {
+        if (users) {
+          res.json(users);
+        }
+
+      });
+    return;
+
   }
 
   function findUsers(req, res) {
