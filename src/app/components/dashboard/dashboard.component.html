@@ -10,13 +10,11 @@
           </div>
         </li>
         <li class="list-group-item" *ngFor="let followedByUser of followedBy">
-        <div class="row">
-          <div class="container-fluid">
-            <!--<a [routerLink]="['/user']"-->
-            <!--{{followedByUser.username}}-->
-            {{followedByUser}}
+          <div class="row">
+            <div class="container-fluid">
+              {{followedByUser}}
+            </div>
           </div>
-        </div>
         </li>
       </ul>
     </div>
@@ -34,8 +32,10 @@
           {{followingUser.username}}
           <div class="row">
             <div class="container-fluid">
-              <!--<a [routerLink]="['/user']"-->
               {{followingUser}}
+              <button type="button" class="pull-right" (click)="unFollow(followingUser)">
+                UnFollow
+              </button>
             </div>
           </div>
         </li>
@@ -46,28 +46,18 @@
       <ul class="list-group">
         <li class="list-group-item active btnStyle">
           <div class="row">
-            <!--<div class="col-lg-2">-->
             <div class="container-fluid">
-              <div> Other Users </div>
+              <div> Other Users</div>
             </div>
           </div>
         </li>
         <li class="list-group-item" *ngFor="let otherUser of otherUsers">
           <div class="row">
-            <!--<div class="col-lg-2">-->
-              <!--<a [routerLink]="['/user']"-->
             <div class="container-fluid">
-            {{otherUser.username}}
-            <!--</div>-->
-            <!--<div class="col-lg-2">-->
-            <!--<div>-->
-              <!--{{otherUser._id}}-->
-              <button type="button" class="pull-right" (click)="addToFollow(otherUser._id)" >
-                <!--<span class="glyphicon glyphicon-plus pull-right">-->
-Follow
-                <!--</span>-->
+              {{otherUser.username}}
+              <button type="button" class="pull-right" (click)="addToFollow(otherUser._id)">
+                Follow
               </button>
-          <!--</div>-->
             </div>
           </div>
         </li>
@@ -87,19 +77,22 @@ Follow
         <li class="list-group-item" *ngFor="let interestedEvent of eventsInterestedIn">
           <div class="row">
             <!--<div class="col-lg-3">-->
-              <!--<a [routerLink]="['/user']"-->
-              <div class="container-fluid">
+            <!--<a [routerLink]="['/user']"-->
+            <div class="container-fluid">
               {{interestedEvent.eventName}}
+            <button type="button" class="pull-right" (click)="removeFromWishList(interestedEvent._id)">
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
             </div>
           </div>
         </li>
       </ul>
     </div>
   </div>
-  <a [routerLink] = "['/user', regUserId, 'events']" class="btn btn-block btn-primary btnStyle">
+  <a [routerLink]="['/user', regUserId, 'events']" class="btn btn-block btn-primary btnStyle">
     Search Events
   </a>
-  <a [routerLink] = "['/login']" class="btn btn-block btn-danger">
+  <a [routerLink]="['/login']" class="btn btn-block btn-danger">
     Logout
   </a>
 </div>

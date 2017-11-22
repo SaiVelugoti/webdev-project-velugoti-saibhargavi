@@ -34,6 +34,21 @@ export class EventService {
     });
   }
 
+
+  addEventToIntList(userId, event) {
+    const url = this.baseUrl + '/api/user/' + userId + '/eventAdd';
+    return this._http.post(url, event).map((response: Response) => {
+      return response;
+      // return response.json();
+    });
+  }
+  removeEveFrmList(userId, eveId) {
+    const url = this.baseUrl + '/api/user/' + userId + '/removeEvent/' + eveId;
+    return this._http.delete(url).map ((response: Response) => {
+      return response;
+    });
+  }
+
   // Server Call
   // findEventsByLocation(location) {
   //   alert('IN Client');

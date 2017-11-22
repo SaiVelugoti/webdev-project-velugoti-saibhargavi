@@ -10,6 +10,9 @@ UserModel.findUserByCredentials = findUserByCredentials;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.addToFollow = addToFollow;
+UserModel.removeFromFollow = removeFromFollow;
+UserModel.addToFollowedBy = addToFollowedBy;
+UserModel.removeFromFollowedBy = removeFromFollowedBy;
 // UserModel.findUsersFollowing = findUsersFollowing;
 // UserModel.findUsersFollowedBy = findUsersFollowedBy;
 
@@ -57,7 +60,21 @@ function addToFollow(userId, followingId) {
 
 function addFollowers(userId, followedById) {
   "use strict";
-  return UserModel.update({_is: userId}, {$push: {followedBy: followedById}});
+  return UserModel.update({_id: userId}, {$push: {followedBy: followedById}});
+}
+
+function removeFromFollow(userId, unFollowId) {
+return UserModel.update({_id: userId}, {$pullAll: {followingUsers: [unFollowId]}});
+}
+
+function addToFollowedBy(userId, followingId) {
+  // "use strict";
+  return UserModel.update({_id: followingId}, {$push: {followedBy: userId}});
+}
+
+function removeFromFollowedBy(userId, unfollowedById) {
+  // "use strict";
+  return UserModel.update({_id: unfollowedById}, {$pullAll: {followedBy: [userId]}});
 }
   // UserModel.update({_id:followingId}, {$push: {followedBy: userId}});
   // return;

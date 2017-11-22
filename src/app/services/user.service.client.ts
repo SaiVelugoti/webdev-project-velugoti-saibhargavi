@@ -42,6 +42,24 @@ export class UserService {
     });
   }
 
+  addUserToFollowedBy(userId, followingId) {
+    const url = this.baseUrl + '/api/user/' + followingId + '/followedBy/' + userId;
+    return this._http.put(url, followingId).map((response, Response) => {
+      return response.json();
+    });
+  }
+  removeUserFromFollow(userId, followingId) {
+    const url = this.baseUrl + '/api/user/' + userId + '/unfollow/' + followingId;
+    return this._http.put(url, followingId).map((response, Response) => {
+      return response.json();
+    });
+  }
+  removeUserFromFollowedBy(userId, followingId) {
+    const url = this.baseUrl + '/api/user/' + followingId + '/unfollowedBy/' + userId;
+    return this._http.put(url, followingId).map((response, Response) => {
+      return response.json();
+    });
+  }
 
   // Asgn 6
   register(username, password) {

@@ -8,9 +8,14 @@ module.exports = function (app) {
   app.put("/api/user/:userId", updateUser);
   app.delete("/api/user/:userId", deleteUser);
   app.put("/api/user/:userId/following/:followingId", addToFollowList);
+  app.put("/api/user/:userId/unFollow/:followingId", removeFromFollowList);
   app.get("/api/user/:userId/dashboard/followedBy", findUsersFollowedBy);
   app.get("/api/user/:userId/dashboard/following", findUsersFollowing);
   app.get("/api/users/", findAllUsers);
+  app.put("/api/user/:followingId/followedBy/:userId", addToFollowedBy);
+  app.put("/api/user/:followingId/unfollowedBy/:userId", removeFromFollowedBy);
+
+
 
   function createUser(req, res) {
     var newUser = req.body;
@@ -43,7 +48,33 @@ module.exports = function (app) {
       .then(function (user) {
         res.json(user);
       });
+  }
 
+  function addToFollowedBy(req, res) {
+    var followingId = req.params["followingId"];
+    var userId = req.params["userId"];
+    return userModel.addToFollowedBy(userId, followingId)
+      .then(function (user) {
+        res.json(user);
+      });
+
+  }
+  function removeFromFollowList(req, res) {
+    var unfollowId = req.params["followingId"];
+    var userId = req.params["userId"];
+    return userModel.removeFromFollow(userId, unfollowId)
+      .then(function (user) {
+        res.json(user);
+      });
+  }
+
+  function removeFromFollowedBy(req, res) {
+    var unfollowedById = req.params["followingId"];
+    var userId = req.params["userId"];
+    return userModel.removeFromFollowedBy(userId, unfollowedById)
+      .then(function (user) {
+        res.json(user);
+      });
   }
 
   function findAllUsers(req, res) {

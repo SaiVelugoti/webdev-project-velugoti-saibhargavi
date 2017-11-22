@@ -1,5 +1,11 @@
 <div class="container-fluid">
+  <div class="pull-right">
+  <a [routerLink]="['/user', userId, 'dashboard']">
+              <span class="glyphicon glyphicon-dashboard">
+              </span>
 
+  </a>
+  </div>
   <label for="location">Location</label>
   <input [(ngModel)]="location"
          name="location"
@@ -17,8 +23,12 @@
         <div class="col-lg-9 col-md-9 col-xs-9">
           <!--<a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageFromList['_id'], 'widget']">-->
           {{eventFromList['title']}}<br/>
-          <a href="{{eventFromList['url']}}" >{{eventFromList['url']}}</a>
+          {{eventFromList['id']}}<br/>
+          <a href="{{eventFromList['url']}}">{{eventFromList['url']}}</a>
           <!--</a>-->
+          <button (click)="addEventAsInterested(eventFromList)" type="button" class="glyphicon glyphicon-star-empty pull-right">
+
+          </button>
         </div>
       </div>
     </li>

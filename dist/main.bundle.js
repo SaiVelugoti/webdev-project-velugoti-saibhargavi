@@ -350,7 +350,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-lg-2\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              Followed By\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let followedByUser of followedBy\">\n        <div class=\"row\">\n          <div class=\"container-fluid\">\n            <!--<a [routerLink]=\"['/user']\"-->\n            <!--{{followedByUser.username}}-->\n            {{followedByUser}}\n          </div>\n        </div>\n        </li>\n      </ul>\n    </div>\n\n    <div class=\"col-lg-2\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              Users you Follow\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let followingUser of usersFollowing\">\n          {{followingUser.username}}\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              <!--<a [routerLink]=\"['/user']\"-->\n              {{followingUser}}\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div class=\"col-lg-2\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <!--<div class=\"col-lg-2\">-->\n            <div class=\"container-fluid\">\n              <div> Other Users </div>\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let otherUser of otherUsers\">\n          <div class=\"row\">\n            <!--<div class=\"col-lg-2\">-->\n              <!--<a [routerLink]=\"['/user']\"-->\n            <div class=\"container-fluid\">\n            {{otherUser.username}}\n            <!--</div>-->\n            <!--<div class=\"col-lg-2\">-->\n            <!--<div>-->\n              <!--{{otherUser._id}}-->\n              <button type=\"button\" class=\"pull-right\" (click)=\"addToFollow(otherUser._id)\" >\n                <!--<span class=\"glyphicon glyphicon-plus pull-right\">-->\nFollow\n                <!--</span>-->\n              </button>\n          <!--</div>-->\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div class=\"col-lg-5\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <!--<div class=\"col-lg-2\">-->\n            <div class=\"container-fluid\">\n              Interested Events\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let interestedEvent of eventsInterestedIn\">\n          <div class=\"row\">\n            <!--<div class=\"col-lg-3\">-->\n              <!--<a [routerLink]=\"['/user']\"-->\n              <div class=\"container-fluid\">\n              {{interestedEvent.eventName}}\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n  </div>\n  <a [routerLink] = \"['/user', regUserId, 'events']\" class=\"btn btn-block btn-primary btnStyle\">\n    Search Events\n  </a>\n  <a [routerLink] = \"['/login']\" class=\"btn btn-block btn-danger\">\n    Logout\n  </a>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"col-lg-2\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              Followed By\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let followedByUser of followedBy\">\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              {{followedByUser}}\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div class=\"col-lg-2\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              Users you Follow\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let followingUser of usersFollowing\">\n          {{followingUser.username}}\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              {{followingUser}}\n              <button type=\"button\" class=\"pull-right\" (click)=\"unFollow(followingUser)\">\n                UnFollow\n              </button>\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div class=\"col-lg-2\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              <div> Other Users</div>\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let otherUser of otherUsers\">\n          <div class=\"row\">\n            <div class=\"container-fluid\">\n              {{otherUser.username}}\n              <button type=\"button\" class=\"pull-right\" (click)=\"addToFollow(otherUser._id)\">\n                Follow\n              </button>\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n\n    <div class=\"col-lg-5\">\n      <ul class=\"list-group\">\n        <li class=\"list-group-item active btnStyle\">\n          <div class=\"row\">\n            <!--<div class=\"col-lg-2\">-->\n            <div class=\"container-fluid\">\n              Interested Events\n            </div>\n          </div>\n        </li>\n        <li class=\"list-group-item\" *ngFor=\"let interestedEvent of eventsInterestedIn\">\n          <div class=\"row\">\n            <!--<div class=\"col-lg-3\">-->\n            <!--<a [routerLink]=\"['/user']\"-->\n            <div class=\"container-fluid\">\n              {{interestedEvent.eventName}}\n            <button type=\"button\" class=\"pull-right\" (click)=\"removeFromWishList(interestedEvent._id)\">\n              <span class=\"glyphicon glyphicon-minus\"></span>\n            </button>\n            </div>\n          </div>\n        </li>\n      </ul>\n    </div>\n  </div>\n  <a [routerLink]=\"['/user', regUserId, 'events']\" class=\"btn btn-block btn-primary btnStyle\">\n    Search Events\n  </a>\n  <a [routerLink]=\"['/login']\" class=\"btn btn-block btn-danger\">\n    Logout\n  </a>\n</div>\n"
 
 /***/ }),
 
@@ -396,17 +396,35 @@ var DashboardComponent = (function () {
             _this.userService.findUsers().subscribe(function (users) {
                 _this.otherUsers = users;
             });
-            _this.eventService.findEventsInterested(_this.regUserId).subscribe(function (eventsInterestedIn) {
-                _this.eventsInterestedIn = eventsInterestedIn;
+            _this.eventService.findEventsInterested(_this.regUserId).subscribe(function (eventsInterested) {
+                _this.eventsInterestedIn = eventsInterested;
             });
         });
     };
     DashboardComponent.prototype.addToFollow = function (userId) {
-        var _this = this;
         this.userService.addUserToFollow(this.regUserId, userId).subscribe(function (response) {
-            _this.router.navigate(['/user', _this.regUserId, 'dashboard']);
+            // window.location.reload();
+            // this.router.navigate(['/user', this.regUserId, 'dashboard']);
         });
-        this.router.navigate(['/user', this.regUserId, 'dashboard']);
+        this.userService.addUserToFollowedBy(this.regUserId, userId).subscribe(function (response) {
+            // window.location.reload();
+            // this.router.navigate(['/user', this.regUserId, 'dashboard']);
+        });
+        window.location.reload();
+    };
+    DashboardComponent.prototype.unFollow = function (userId) {
+        this.userService.removeUserFromFollow(this.regUserId, userId).subscribe(function (response) {
+            // window.location.reload();
+            // this.router.navigate(['/user', this.regUserId, 'dashboard']);
+        });
+        this.userService.removeUserFromFollowedBy(this.regUserId, userId).subscribe(function (response) {
+        });
+        window.location.reload();
+    };
+    DashboardComponent.prototype.removeFromWishList = function (eveId) {
+        this.eventService.removeEveFrmList(this.regUserId, eveId).subscribe(function (response) {
+            window.location.reload();
+        });
     };
     return DashboardComponent;
 }());
@@ -445,7 +463,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/eventpage/eventpage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n\n  <label for=\"location\">Location</label>\n  <input [(ngModel)]=\"location\"\n         name=\"location\"\n         id=\"location\"\n         placeholder=\"Example: San Diego\"\n         class=\"form-control\">\n  <button\n    (click)=\"searchEvents(location)\"\n    class=\"btn btn-primary btn-block\">Get Events\n  </button>\n\n  <div *ngIf=\"eventsExists\">\n    <li class=\"list-group-item\" *ngFor=\"let eventFromList of eventsFound\">\n      <div class=\"row\">\n        <div class=\"col-lg-9 col-md-9 col-xs-9\">\n          <!--<a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageFromList['_id'], 'widget']\">-->\n          {{eventFromList['title']}}<br/>\n          <a href=\"{{eventFromList['url']}}\" >{{eventFromList['url']}}</a>\n          <!--</a>-->\n        </div>\n      </div>\n    </li>\n  </div>\n\n  <div *ngIf=\"noEventsRetrieved\" class=\"alert\">\n    No Events exist for this search criteria\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"pull-right\">\n  <a [routerLink]=\"['/user', userId, 'dashboard']\">\n              <span class=\"glyphicon glyphicon-dashboard\">\n              </span>\n\n  </a>\n  </div>\n  <label for=\"location\">Location</label>\n  <input [(ngModel)]=\"location\"\n         name=\"location\"\n         id=\"location\"\n         placeholder=\"Example: San Diego\"\n         class=\"form-control\">\n  <button\n    (click)=\"searchEvents(location)\"\n    class=\"btn btn-primary btn-block\">Get Events\n  </button>\n\n  <div *ngIf=\"eventsExists\">\n    <li class=\"list-group-item\" *ngFor=\"let eventFromList of eventsFound\">\n      <div class=\"row\">\n        <div class=\"col-lg-9 col-md-9 col-xs-9\">\n          <!--<a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageFromList['_id'], 'widget']\">-->\n          {{eventFromList['title']}}<br/>\n          {{eventFromList['id']}}<br/>\n          <a href=\"{{eventFromList['url']}}\">{{eventFromList['url']}}</a>\n          <!--</a>-->\n          <button (click)=\"addEventAsInterested(eventFromList)\" type=\"button\" class=\"glyphicon glyphicon-star-empty pull-right\">\n\n          </button>\n        </div>\n      </div>\n    </li>\n  </div>\n\n  <div *ngIf=\"noEventsRetrieved\" class=\"alert\">\n    No Events exist for this search criteria\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -456,6 +474,7 @@ module.exports = "<div class=\"container-fluid\">\n\n  <label for=\"location\">L
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventPageComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__ = __webpack_require__("../../../../../src/app/services/event.service.client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -467,13 +486,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var EventPageComponent = (function () {
-    function EventPageComponent(eventService) {
+    function EventPageComponent(eventService, activatedRoute, router) {
         this.eventService = eventService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
     }
     EventPageComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.eventsExists = false;
         this.noEventsRetrieved = false;
+        this.activatedRoute.params
+            .subscribe(function (params) {
+            _this.userId = params['userId'];
+            _this.eventService.findEventsInterested(_this.userId)
+                .subscribe(function (eventsInt) {
+                _this.eventsForUser = eventsInt;
+            });
+        });
     };
     EventPageComponent.prototype.searchEvents = function () {
         var _this = this;
@@ -491,6 +522,38 @@ var EventPageComponent = (function () {
             }
         });
     };
+    // createWebsite() {
+    //   if (this.webCreateForm.value.websiteName === '' && this.webCreateForm.value.webDescription === '') {
+    //     this.router.navigate(['/user/', this.userId, 'website']);
+    //   } else if (this.webCreateForm.value.websiteName !== '' && this.webCreateForm.value.webDescription !== '') {
+    //     const web = {
+    //       _id: this.newWebId,
+    //       name: this.webCreateForm.value.websiteName,
+    //       developerId: this.userId,
+    //       description: this.webCreateForm.value.webDescription
+    //     };
+    //     this.websiteService.createWebsite(this.userId, web).subscribe((site: any) => {
+    //       this.router.navigate(['/user', this.userId, 'website']);
+    //     });
+    //   } else {
+    //     this.errorMsg = 'Enter both name and description';
+    //     this.errorFlag = true;
+    //   }
+    // }
+    //
+    EventPageComponent.prototype.addEventAsInterested = function (eventToAdd) {
+        var eventI = {
+            regUserId: this.userId,
+            eventName: eventToAdd['title'],
+            eventURL: eventToAdd['url'],
+            eve_id: eventToAdd['id']
+        };
+        console.log('EventPage TS ->' + eventI);
+        this.eventService.addEventToIntList(this.userId, eventI)
+            .subscribe(function (ev) {
+            // this.router.navigate(['/user', this.userId, 'dashboard']);
+        });
+    };
     return EventPageComponent;
 }());
 EventPageComponent = __decorate([
@@ -499,10 +562,10 @@ EventPageComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/components/eventpage/eventpage.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/eventpage/eventpage.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__["a" /* EventService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__["a" /* EventService */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__["a" /* EventService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__["a" /* EventService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], EventPageComponent);
 
-var _a;
+var _a, _b, _c;
 //# sourceMappingURL=eventpage.component.js.map
 
 /***/ }),
@@ -2556,6 +2619,19 @@ var EventService = (function () {
             return response.json();
         });
     };
+    EventService.prototype.addEventToIntList = function (userId, event) {
+        var url = this.baseUrl + '/api/user/' + userId + '/eventAdd';
+        return this._http.post(url, event).map(function (response) {
+            return response;
+            // return response.json();
+        });
+    };
+    EventService.prototype.removeEveFrmList = function (userId, eveId) {
+        var url = this.baseUrl + '/api/user/' + userId + '/removeEvent/' + eveId;
+        return this._http.delete(url).map(function (response) {
+            return response;
+        });
+    };
     return EventService;
 }());
 EventService = __decorate([
@@ -2791,6 +2867,24 @@ var UserService = (function () {
     };
     UserService.prototype.addUserToFollow = function (userId, followingId) {
         var url = this.baseUrl + '/api/user/' + userId + '/following/' + followingId;
+        return this._http.put(url, followingId).map(function (response, Response) {
+            return response.json();
+        });
+    };
+    UserService.prototype.addUserToFollowedBy = function (userId, followingId) {
+        var url = this.baseUrl + '/api/user/' + followingId + '/followedBy/' + userId;
+        return this._http.put(url, followingId).map(function (response, Response) {
+            return response.json();
+        });
+    };
+    UserService.prototype.removeUserFromFollow = function (userId, followingId) {
+        var url = this.baseUrl + '/api/user/' + userId + '/unfollow/' + followingId;
+        return this._http.put(url, followingId).map(function (response, Response) {
+            return response.json();
+        });
+    };
+    UserService.prototype.removeUserFromFollowedBy = function (userId, followingId) {
+        var url = this.baseUrl + '/api/user/' + followingId + '/unfollowedBy/' + userId;
         return this._http.put(url, followingId).map(function (response, Response) {
             return response.json();
         });
