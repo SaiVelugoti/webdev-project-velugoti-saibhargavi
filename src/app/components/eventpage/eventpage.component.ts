@@ -56,7 +56,11 @@ export class EventPageComponent implements OnInit {
 
   displayEventDetail(id) {
     console.log('id');
-    this.router.navigate(['/user', this.userId, 'dashboard', 'event', id]);
+    if (this.userId === '' || this.userId === undefined) {
+      this.router.navigate(['/event', id]);
+    } else {
+      this.router.navigate(['/user', this.userId, 'dashboard', 'event', id]);
+    }
   }
 
   // createWebsite() {

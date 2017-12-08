@@ -35,7 +35,8 @@ const APP_ROUTES: Routes = [
   { path : 'user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/:widtype' , component: WidgetEditComponent},
   { path : 'user/:userId/events', component: EventPageComponent },
   { path : 'user/:userId/dashboard', component: DashboardComponent},
-  { path : 'user/:userId/dashboard/event/:id', component: EventDetailComponent}
+  { path : 'user/:userId/dashboard/event/:id', component: EventDetailComponent},
+  { path : 'event/:id', component: EventDetailComponent}
 ];
 
 

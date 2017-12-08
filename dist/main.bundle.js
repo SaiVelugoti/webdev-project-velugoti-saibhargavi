@@ -267,7 +267,8 @@ var APP_ROUTES = [
     { path: 'user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/:widtype', component: __WEBPACK_IMPORTED_MODULE_13__components_widget_widget_edit_widget_edit_component__["a" /* WidgetEditComponent */] },
     { path: 'user/:userId/events', component: __WEBPACK_IMPORTED_MODULE_14__components_eventpage_eventpage_component__["a" /* EventPageComponent */] },
     { path: 'user/:userId/dashboard', component: __WEBPACK_IMPORTED_MODULE_15__components_dashboard_dashboard_component__["a" /* DashboardComponent */] },
-    { path: 'user/:userId/dashboard/event/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_event_detail_event_detail_component__["a" /* EventDetailComponent */] }
+    { path: 'user/:userId/dashboard/event/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_event_detail_event_detail_component__["a" /* EventDetailComponent */] },
+    { path: 'event/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_event_detail_event_detail_component__["a" /* EventDetailComponent */] }
 ];
 // Export the routes as module providers
 var Routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(APP_ROUTES);
@@ -470,7 +471,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/event-detail/event-detail.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <h4>Description</h4>\n  <br/>\n  {{eventDetail['description']}}\n  <br/>\n  <br/>\n  <h4>\n    Address\n  </h4>\n  {{eventDetail['address']}}\n  <br/>\n  <h4>\n    Link\n  </h4>\n  {{eventDetail['url']}}\n  <br/>\n  <br/>\n  <h4>\n    Start Time\n  </h4>\n  <br/>\n  {{eventDetail['start_time']}}\n  <br/>\n\n\n\n\n\n  <div *ngIf=\"noEventsRetrieved\" class=\"alert\">\n    No Events exist for this search criteria\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <<h4>Description</h4>\n  <br/>\n  {{eventDetail['description']}}\n  <br/>\n  <br/>\n  <h4>\n    Address\n  </h4>\n  {{eventDetail['address']}}\n  <br/>\n  <h4>\n    Link\n  </h4>\n  {{eventDetail['url']}}\n  <br/>\n  <br/>\n  <h4>\n    Start Time\n  </h4>\n  <br/>\n  {{eventDetail['start_time']}}\n  <br/>\n\n\n\n\n\n  <div *ngIf=\"noEventsRetrieved\" class=\"alert\">\n    No Events exist for this search criteria\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -657,7 +658,12 @@ var EventPageComponent = (function () {
     };
     EventPageComponent.prototype.displayEventDetail = function (id) {
         console.log('id');
-        this.router.navigate(['/user', this.userId, 'dashboard', 'event', id]);
+        if (this.userId === '' || this.userId === undefined) {
+            this.router.navigate(['/event', id]);
+        }
+        else {
+            this.router.navigate(['/user', this.userId, 'dashboard', 'event', id]);
+        }
     };
     // createWebsite() {
     //   if (this.webCreateForm.value.websiteName === '' && this.webCreateForm.value.webDescription === '') {
