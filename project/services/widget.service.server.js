@@ -1,14 +1,14 @@
 module.exports = function (app) {
 
-  // var multer = require('multer');
-  // var upload = multer({ dest: __dirname +'/../../src/assets/uploads'});
+  var multer = require('multer');
+  var upload = multer({ dest: __dirname +'/../../src/assets/uploads'});
 
   app.post("/api/page/:pageId/widget", createWidget);
   app.get("/api/page/:pageId/widget", findAllWidgetsForPage);
   app.get("/api/widget/:widgetId", findWidgetById);
   app.put("/api/widget/:widgetId", updateWidget);
   app.delete("/api/widget/:widgetId", deleteWidget);
-  // app.post("/api/upload", upload.single('myFile'), uploadImage);
+  app.post("/api/upload", upload.single('myFile'), uploadImage);
 
   var widgetModel = require("../model/widget/widget.model.server")
 
@@ -67,40 +67,40 @@ module.exports = function (app) {
       })
   }
 
-  // function uploadImage(req, res) {
-  //   var widgetId = req.body.widgetId;
-  //   var width = req.body.width;
-  //   var myFile = req.file;
-  //
-  //   var userId = req.body.userId;
-  //   var websiteId = req.body.websiteId;
-  //   var pageId = req.body.pageId;
-  //
-  //   var originalname = myFile.originalname;
-  //   var filename = myFile.filename;
-  //   var path = myFile.path;
-  //   var destination = myFile.destination;
-  //   var size = myFile.size;
-  //   var mimetype = myFile.mimetype;
-  //
-  //   var widget = getWidgetById(widgetId);
-  //   console.log('hey its me' + filename);
-  //
-  //   widget.url = 'assets/uploads/' + filename;
-  //   widget.width = width;
-  //
-  //
-  //     for (let x = 0; x < this.widgets.length; x++) {
-  //       if (this.widgets[x]._id === widgetId) {
-  //         this.widgets[x] = widget;
-  //       }
-  //   }
-  //
-  //   var callbackUrl = '/user/' + userId + '/website/' + websiteId + '/page/' + pageId + '/widget';
-  //   res.redirect(callbackUrl);
-  // }
+  function uploadImage(req, res) {
+    var widgetId = req.body.widgetId;
+    var width = req.body.width;
+    var myFile = req.file;
+
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+
+    var originalname = myFile.originalname;
+    var filename = myFile.filename;
+    var path = myFile.path;
+    var destination = myFile.destination;
+    var size = myFile.size;
+    var mimetype = myFile.mimetype;
+
+    var widget = getWidgetById(widgetId);
+    // console.log('hey its me' + filename);
+
+    widget.url = 'assets/uploads/' + filename;
+    widget.width = width;
+
+
+    //   for (let x = 0; x < this.widgets.length; x++) {
+    //     if (this.widgets[x]._id === widgetId) {
+    //       this.widgets[x] = widget;
+    //     }
+    // }
+
+    var callbackUrl = '/user/' + userId + '/website/' + websiteId + '/page/' + pageId + '/widget';
+    res.redirect(callbackUrl);
+  }
   function getWidgetById(widgetId) {
-    for (let x = 0; x < widgets.length; x++) {
+    for (var x = 0; x < widgets.length; x++) {
       if (widgets[x]._id === widgetId) {
         return widgets[x];
       }

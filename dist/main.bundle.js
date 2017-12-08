@@ -107,12 +107,14 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__components_eventpage_eventpage_component__ = __webpack_require__("../../../../../src/app/components/eventpage/eventpage.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__services_event_service_client__ = __webpack_require__("../../../../../src/app/services/event.service.client.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__components_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__components_event_detail_event_detail_component__ = __webpack_require__("../../../../../src/app/components/event-detail/event-detail.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -180,7 +182,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_31__components_widget_widget_edit_widget_html_widget_html_component__["a" /* WidgetHtmlComponent */],
             __WEBPACK_IMPORTED_MODULE_32__components_widget_widget_edit_widget_text_widget_text_component__["a" /* WidgetTextComponent */],
             __WEBPACK_IMPORTED_MODULE_33__components_eventpage_eventpage_component__["a" /* EventPageComponent */],
-            __WEBPACK_IMPORTED_MODULE_35__components_dashboard_dashboard_component__["a" /* DashboardComponent */]
+            __WEBPACK_IMPORTED_MODULE_35__components_dashboard_dashboard_component__["a" /* DashboardComponent */],
+            __WEBPACK_IMPORTED_MODULE_36__components_event_detail_event_detail_component__["a" /* EventDetailComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -228,6 +231,8 @@ AppModule = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_widget_widget_edit_widget_edit_component__ = __webpack_require__("../../../../../src/app/components/widget/widget-edit/widget-edit.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_eventpage_eventpage_component__ = __webpack_require__("../../../../../src/app/components/eventpage/eventpage.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/components/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_event_detail_event_detail_component__ = __webpack_require__("../../../../../src/app/components/event-detail/event-detail.component.ts");
+
 
 
 
@@ -260,7 +265,8 @@ var APP_ROUTES = [
     { path: 'user/:userId/website/:websiteId/page/:pageId/widget/new', component: __WEBPACK_IMPORTED_MODULE_12__components_widget_widget_chooser_widget_chooser_component__["a" /* WidgetChooserComponent */] },
     { path: 'user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/:widtype', component: __WEBPACK_IMPORTED_MODULE_13__components_widget_widget_edit_widget_edit_component__["a" /* WidgetEditComponent */] },
     { path: 'user/:userId/events', component: __WEBPACK_IMPORTED_MODULE_14__components_eventpage_eventpage_component__["a" /* EventPageComponent */] },
-    { path: 'user/:userId/dashboard', component: __WEBPACK_IMPORTED_MODULE_15__components_dashboard_dashboard_component__["a" /* DashboardComponent */] }
+    { path: 'user/:userId/dashboard', component: __WEBPACK_IMPORTED_MODULE_15__components_dashboard_dashboard_component__["a" /* DashboardComponent */] },
+    { path: 'user/:userId/dashboard/event/:id', component: __WEBPACK_IMPORTED_MODULE_16__components_event_detail_event_detail_component__["a" /* EventDetailComponent */] }
 ];
 // Export the routes as module providers
 var Routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["c" /* RouterModule */].forRoot(APP_ROUTES);
@@ -442,6 +448,131 @@ var _a, _b, _c, _d;
 
 /***/ }),
 
+/***/ "../../../../../src/app/components/event-detail/event-detail.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/event-detail/event-detail.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid\">\n  <h4>Description</h4>\n  <br/>\n  {{eventDetail['description']}}\n  <br/>\n  <br/>\n  <h4>\n    Address\n  </h4>\n  {{eventDetail['address']}}\n  <br/>\n  <h4>\n    Link\n  </h4>\n  {{eventDetail['url']}}\n  <br/>\n  <br/>\n  <h4>\n    Start Time\n  </h4>\n  <br/>\n  {{eventDetail['start_time']}}\n  <br/>\n\n\n\n\n\n  <div *ngIf=\"noEventsRetrieved\" class=\"alert\">\n    No Events exist for this search criteria\n  </div>\n\n\n</div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/event-detail/event-detail.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EventDetailComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__ = __webpack_require__("../../../../../src/app/services/event.service.client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var EventDetailComponent = (function () {
+    function EventDetailComponent(eventService, activatedRoute, router) {
+        this.eventService = eventService;
+        this.activatedRoute = activatedRoute;
+        this.router = router;
+    }
+    EventDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.activatedRoute.params
+            .subscribe(function (params) {
+            _this.eventId = params['id'];
+            _this.eventService.findEventById(_this.eventId)
+                .subscribe(function (eventDetail) {
+                if (eventDetail) {
+                    _this.eventDetail = eventDetail;
+                }
+            });
+        });
+        console.log('IN Init -> event detail');
+        console.log(this.description);
+    };
+    EventDetailComponent.prototype.displayEventDetail = function (eventFromList) {
+        var _this = this;
+        console.log('Entered display function');
+        this.displayEventDetails = true;
+        this.description = eventFromList['description'];
+        console.log('In evetpage  -display', this.description);
+        this.eventService.findEventById(eventFromList['id'])
+            .subscribe(function (eventDetail) {
+            if (eventDetail) {
+                _this.description = eventDetail['description'];
+            }
+        });
+        // window.location.reload();
+    };
+    EventDetailComponent.prototype.searchEvents = function () {
+        var _this = this;
+        this.eventService.findEventsByLocation(this.location)
+            .subscribe(function (eventsForLoc) {
+            if (eventsForLoc) {
+                _this.eventsExists = true;
+                console.log(eventsForLoc.events);
+                console.log(eventsForLoc.events.event);
+                _this.eventsFound = eventsForLoc.events.event;
+                console.log(eventsForLoc['events']);
+            }
+            else {
+                _this.noEventsRetrieved = true;
+            }
+        });
+    };
+    EventDetailComponent.prototype.addEventAsInterested = function (eventToAdd) {
+        var eventI = {
+            regUserId: this.userId,
+            eventName: eventToAdd['title'],
+            eventURL: eventToAdd['url'],
+            eve_id: eventToAdd['id']
+        };
+        console.log('EventPage TS ->' + eventI);
+        this.eventService.addEventToIntList(this.userId, eventI)
+            .subscribe(function (ev) {
+            // this.router.navigate(['/user', this.userId, 'dashboard']);
+        });
+    };
+    return EventDetailComponent;
+}());
+EventDetailComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+        selector: 'app-event-detail',
+        template: __webpack_require__("../../../../../src/app/components/event-detail/event-detail.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/event-detail/event-detail.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__["a" /* EventService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_event_service_client__["a" /* EventService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object])
+], EventDetailComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=event-detail.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/components/eventpage/eventpage.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -463,7 +594,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/eventpage/eventpage.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"pull-right\">\n  <a [routerLink]=\"['/user', userId, 'dashboard']\">\n              <span class=\"glyphicon glyphicon-dashboard\">\n              </span>\n\n  </a>\n  </div>\n  <label for=\"location\">Location</label>\n  <input [(ngModel)]=\"location\"\n         name=\"location\"\n         id=\"location\"\n         placeholder=\"Example: San Diego\"\n         class=\"form-control\">\n  <button\n    (click)=\"searchEvents(location)\"\n    class=\"btn btn-primary btn-block\">Get Events\n  </button>\n\n  <div *ngIf=\"eventsExists\">\n    <li class=\"list-group-item\" *ngFor=\"let eventFromList of eventsFound\">\n      <div class=\"row\">\n        <div class=\"col-lg-9 col-md-9 col-xs-9\">\n          <!--<a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageFromList['_id'], 'widget']\">-->\n          {{eventFromList['title']}}<br/>\n          {{eventFromList['id']}}<br/>\n          <a href=\"{{eventFromList['url']}}\">{{eventFromList['url']}}</a>\n          <!--</a>-->\n          <button (click)=\"addEventAsInterested(eventFromList)\" type=\"button\" class=\"glyphicon glyphicon-star-empty pull-right\">\n\n          </button>\n        </div>\n      </div>\n    </li>\n  </div>\n\n  <div *ngIf=\"noEventsRetrieved\" class=\"alert\">\n    No Events exist for this search criteria\n  </div>\n\n\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"pull-right\">\n  <a [routerLink]=\"['/user', userId, 'dashboard']\">\n              <span class=\"glyphicon glyphicon-dashboard\">\n              </span>\n\n  </a>\n  </div>\n  <label for=\"location\">Location</label>\n  <input [(ngModel)]=\"location\"\n         name=\"location\"\n         id=\"location\"\n         placeholder=\"Example: San Diego\"\n         class=\"form-control\">\n  <button\n    (click)=\"searchEvents(location)\"\n    class=\"btn btn-primary btn-block\">Get Events\n  </button>\n\n  <div *ngIf=\"eventsExists\">\n    <h5>Click on the event to get the details</h5>\n    <li class=\"list-group-item\" *ngFor=\"let eventFromList of eventsFound\">\n      <div class=\"row\">\n        <div class=\"col-lg-9 col-md-9 col-xs-9\">\n          <!--<a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageFromList['_id'], 'widget']\">-->\n          <a (click) = \"displayEventDetail(eventFromList['id'])\"> {{eventFromList['title']}}</a><br/>\n<!--<div class=\"row\" *ngIf=\"displayEventDetails\">-->\n  <!--Hello-->\n\n  <!--{{eventFromList['description']}}-->\n          <!--{{eventFromList['start_time']}}-->\n<!--</div>-->\n          <!--{{eventFromList['id']}}<br/>-->\n          <!--<a href=\"{{eventFromList['url']}}\">{{eventFromList['url']}}</a>-->\n          <!--</a>-->\n          <button (click)=\"addEventAsInterested(eventFromList)\" type=\"button\" class=\"glyphicon glyphicon-star-empty pull-right\">\n\n          </button>\n        </div>\n      </div>\n    </li>\n  </div>\n\n  <div *ngIf=\"noEventsRetrieved\" class=\"alert\">\n    No Events exist for this search criteria\n  </div>\n\n\n</div>\n"
 
 /***/ }),
 
@@ -495,6 +626,7 @@ var EventPageComponent = (function () {
     }
     EventPageComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.displayEventDetails = false;
         this.eventsExists = false;
         this.noEventsRetrieved = false;
         this.activatedRoute.params
@@ -521,6 +653,10 @@ var EventPageComponent = (function () {
                 _this.noEventsRetrieved = true;
             }
         });
+    };
+    EventPageComponent.prototype.displayEventDetail = function (id) {
+        console.log('id');
+        this.router.navigate(['/user', this.userId, 'dashboard', 'event', id]);
     };
     // createWebsite() {
     //   if (this.webCreateForm.value.websiteName === '' && this.webCreateForm.value.webDescription === '') {
@@ -2092,7 +2228,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/widget/widget-edit/widget-image/widget-image.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-fixed-top bg-primary btnStyle\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header header-width header-fix\">\n      <p class=\"navbar-text pull-left p-fix\">\n        <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\"\n           class=\"navbar-link glyphicon-color\">\n              <span class=\"glyphicon glyphicon-chevron-left\">\n              </span>\n        </a>\n      </p>\n\n      <span class=\"navbar-brand\">Widget Edit</span>\n      <p class=\"navbar-text pull-right p-right-fix\">\n        <a (click)=\"createEditImage()\"\n           class=\"navbar-link glyphicon-color\">\n              <span class=\"glyphicon glyphicon-ok\">\n              </span>\n        </a>\n      </p>\n    </div>\n\n  </div>\n</nav>\n\n\n<form (ngSubmit)=\"createEditImage()\" #f=\"ngForm\">\n  <div class=\"container-fluid\">\n    <!--<form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">-->\n    <div *ngIf=\"errorFlag\"\n         class=\"alert alert-danger\">\n      {{errMsg}}\n    </div>\n    <div class=\"form-group\">\n\n      <label for=\"name\">Name</label>\n      <input [(ngModel)]=\"name\"\n             placeholder=\"Sun\"\n             value={{name}}\n             type=\"text\"\n             id=\"name\"\n             name=\"name\"\n             class=\"form-control\"\n      />\n      <label for=\"url\">URL</label>\n      <input [(ngModel)]=\"url\"\n             placeholder=\"https://solarsystem.nasa.gov/images/galleries/soho-300.jpg\"\n             value={{url}}\n             type=\"text\"\n             id=\"url\"\n             name=\"url\"\n             class=\"form-control\"\n      />\n      <label for=\"width\">Width</label>\n      <input [(ngModel)]=\"width\"\n             placeholder=\"80%\"\n             value={{width}}\n             type=\"text\"\n             id=\"width\"\n             name=\"width\"\n             class=\"form-control\"\n      />\n\n      <!--<label for=\"upload\">Upload</label>-->\n      <!--<input type=\"file\"-->\n      <!--id=\"upload\"-->\n      <!--name=\"page-title\"-->\n      <!--class=\"form-control\"-->\n      <!--placeholder=\"Widget Upload\">-->\n\n      <!--<button class=\"btn btn-block btnStyle bg-primary\"-->\n      <!--type=\"submit\"-->\n      <!--[disabled]=\"!f.valid\">Upload Image</button>-->\n\n      <!--<input  name=\"myFile\"   type=\"file\" class=\"form-control\"/>-->\n      <!--<input  name=\"widgetId\" value=\"{{widgetId}}\"   style=\"display: none\"/>-->\n      <!--<input  name=\"websiteId\" value=\"{{websiteId}}\"   style=\"display: none\"/>-->\n      <!--<input  name=\"pageId\" value=\"{{pageId}}\"   style=\"display: none\"/>-->\n      <!--<input  name=\"userId\" value=\"{{userId}}\"   style=\"display: none\"/>-->\n      <!--<button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>-->\n      <br/>\n      <div *ngIf=widgetExists>\n        <button class=\"btn btn-danger btn-block \"\n                (click)='deleteWidget()'>Delete\n        </button>\n      </div>\n    </div>\n    <!--</form>-->\n  </div>\n\n</form>\n<nav class=\"navbar navbar-fixed-bottom bg-primary btnStyle\">\n  <div class=\"container-fluid\">\n    <p class=\"navbar-text pull-right\">\n      <a [routerLink]=\"['/user', userId]\" class=\"navbar-link glyphicon-color\">\n              <span class=\"glyphicon glyphicon-user\">\n              </span>\n      </a>\n    </p>\n  </div>\n</nav>\n"
+module.exports = "<nav class=\"navbar navbar-fixed-top bg-primary btnStyle\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header header-width header-fix\">\n      <p class=\"navbar-text pull-left p-fix\">\n        <a [routerLink]=\"['/user', userId, 'website', websiteId, 'page', pageId, 'widget']\"\n           class=\"navbar-link glyphicon-color\">\n              <span class=\"glyphicon glyphicon-chevron-left\">\n              </span>\n        </a>\n      </p>\n\n      <span class=\"navbar-brand\">Widget Edit</span>\n      <p class=\"navbar-text pull-right p-right-fix\">\n        <a (click)=\"createEditImage()\"\n           class=\"navbar-link glyphicon-color\">\n              <span class=\"glyphicon glyphicon-ok\">\n              </span>\n        </a>\n      </p>\n    </div>\n\n  </div>\n</nav>\n\n\n<form (ngSubmit)=\"createEditImage()\" #f=\"ngForm\">\n  <div class=\"container-fluid\">\n    <div *ngIf=\"errorFlag\"\n         class=\"alert alert-danger\">\n      {{errMsg}}\n    </div>\n    <div class=\"form-group\">\n\n      <label for=\"name\">Name</label>\n      <input [(ngModel)]=\"name\"\n             placeholder=\"Sun\"\n             value={{name}}\n             type=\"text\"\n             id=\"name\"\n             name=\"name\"\n             class=\"form-control\"\n      />\n      <label for=\"url\">URL</label>\n      <input [(ngModel)]=\"url\"\n             placeholder=\"https://solarsystem.nasa.gov/images/galleries/soho-300.jpg\"\n             value={{url}}\n             type=\"text\"\n             id=\"url\"\n             name=\"url\"\n             class=\"form-control\"\n      />\n      <label for=\"width\">Width</label>\n      <input [(ngModel)]=\"width\"\n             placeholder=\"80%\"\n             value={{width}}\n             type=\"text\"\n             id=\"width\"\n             name=\"width\"\n             class=\"form-control\"\n      />\n      <form ngNoForm action=\"{{baseUrl}}/api/upload\" method=\"post\" enctype=\"multipart/form-data\">\n        <input  name=\"myFile\"   type=\"file\" class=\"form-control\"/>\n        <input  name=\"widgetId\" value=\"{{widgetId}}\"   style=\"display: none\"/>\n        <input  name=\"websiteId\" value=\"{{websiteId}}\"   style=\"display: none\"/>\n        <input  name=\"pageId\" value=\"{{pageId}}\"   style=\"display: none\"/>\n        <input  name=\"userId\" value=\"{{userId}}\"   style=\"display: none\"/>\n        <button type=\"submit\" class=\"btn btn-block btn-primary\">Upload Image</button>\n        <br/>\n      </form>\n\n      <br/>\n      <div *ngIf=widgetExists>\n        <button class=\"btn btn-danger btn-block \"\n                (click)='deleteWidget()'>Delete\n        </button>\n      </div>\n    </div>\n  </div>\n\n</form>\n<nav class=\"navbar navbar-fixed-bottom bg-primary btnStyle\">\n  <div class=\"container-fluid\">\n    <p class=\"navbar-text pull-right\">\n      <a [routerLink]=\"['/user', userId]\" class=\"navbar-link glyphicon-color\">\n              <span class=\"glyphicon glyphicon-user\">\n              </span>\n      </a>\n    </p>\n  </div>\n</nav>\n"
 
 /***/ }),
 
@@ -2105,6 +2241,7 @@ module.exports = "<nav class=\"navbar navbar-fixed-top bg-primary btnStyle\">\n 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_widget_service_client__ = __webpack_require__("../../../../../src/app/services/widget.service.client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2118,11 +2255,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var WidgetImageComponent = (function () {
     function WidgetImageComponent(widgetService, activatedRoute, router) {
         this.widgetService = widgetService;
         this.activatedRoute = activatedRoute;
         this.router = router;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].baseUrl;
     }
     WidgetImageComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -2614,6 +2753,15 @@ var EventService = (function () {
         // }
         var proxyURL = 'https://cors-anywhere.herokuapp.com/';
         var apiURL = 'http://api.eventful.com/json/events/search/?location=' + location + '&app_key=' + apiKey;
+        var url = proxyURL + apiURL;
+        return this._http.get(url).map(function (response) {
+            return response.json();
+        });
+    };
+    EventService.prototype.findEventById = function (eventId) {
+        var apiKey = __WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].api_Key;
+        var proxyURL = 'https://cors-anywhere.herokuapp.com/';
+        var apiURL = 'http://api.eventful.com/json/events/get?id=' + eventId + '&app_key=' + apiKey;
         var url = proxyURL + apiURL;
         return this._http.get(url).map(function (response) {
             return response.json();

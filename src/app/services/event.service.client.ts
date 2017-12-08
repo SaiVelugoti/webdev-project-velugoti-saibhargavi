@@ -34,6 +34,15 @@ export class EventService {
     });
   }
 
+  findEventById(eventId) {
+    const apiKey = environment.api_Key;
+    const proxyURL = 'https://cors-anywhere.herokuapp.com/';
+    const apiURL = 'http://api.eventful.com/json/events/get?id=' + eventId + '&app_key=' + apiKey;
+    const url = proxyURL + apiURL;
+    return this._http.get(url).map((response: Response) => {
+      return response.json();
+    });
+  }
 
   addEventToIntList(userId, event) {
     const url = this.baseUrl + '/api/user/' + userId + '/eventAdd';
@@ -42,9 +51,10 @@ export class EventService {
       // return response.json();
     });
   }
+
   removeEveFrmList(userId, eveId) {
     const url = this.baseUrl + '/api/user/' + userId + '/removeEvent/' + eveId;
-    return this._http.delete(url).map ((response: Response) => {
+    return this._http.delete(url).map((response: Response) => {
       return response;
     });
   }

@@ -15,6 +15,7 @@ import {WidgetChooserComponent} from './components/widget/widget-chooser/widget-
 import {WidgetEditComponent} from './components/widget/widget-edit/widget-edit.component';
 import { EventPageComponent} from './components/eventpage/eventpage.component';
 import {DashboardComponent} from './components/dashboard/dashboard.component';
+import {EventDetailComponent} from './components/event-detail/event-detail.component';
 
 const APP_ROUTES: Routes = [
   { path : '' , component: LoginComponent},
@@ -32,8 +33,10 @@ const APP_ROUTES: Routes = [
   { path : 'user/:userId/website/:websiteId/page/:pageId/widget/new' , component: WidgetChooserComponent},
   { path : 'user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/:widtype' , component: WidgetEditComponent},
   { path : 'user/:userId/events', component: EventPageComponent },
-  { path : 'user/:userId/dashboard', component: DashboardComponent}
+  { path : 'user/:userId/dashboard', component: DashboardComponent},
+  { path : 'user/:userId/dashboard/event/:id', component: EventDetailComponent}
 ];
+
 
 // Export the routes as module providers
 export const Routing: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES);
