@@ -15,11 +15,14 @@ export class EventPageComponent implements OnInit {
   noEventsRetrieved: boolean;
   userId: string;
   eventsForUser: any;
+  displayEventDetails: boolean;
+  description: any;
 
   constructor(private eventService: EventService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit() {
+    this.displayEventDetails = false;
     this.eventsExists = false;
     this.noEventsRetrieved = false;
     this.activatedRoute.params
@@ -31,6 +34,7 @@ export class EventPageComponent implements OnInit {
           });
       });
   }
+
 
   searchEvents() {
     this.eventService.findEventsByLocation(this.location)
@@ -48,6 +52,11 @@ export class EventPageComponent implements OnInit {
         }
       );
 
+  }
+
+  displayEventDetail(id) {
+    console.log('id');
+    this.router.navigate(['/user', this.userId, 'dashboard', 'event', id]);
   }
 
   // createWebsite() {

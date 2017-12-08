@@ -26,7 +26,7 @@ export class WidgetImageComponent implements OnInit {
   widgetRet: any;
   widgetNew: {};
   widgetExists: boolean;
-
+baseUrl = environment.baseUrl;
   constructor(private widgetService: WidgetService, private activatedRoute: ActivatedRoute, private router: Router) {
   }
 

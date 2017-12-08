@@ -1,0 +1,34 @@
+<div class="container-fluid">
+  <h4>Description</h4>
+  <br/>
+  {{eventDetail['description']}}
+  <br/>
+  <br/>
+  <h4>
+    Address
+  </h4>
+  {{eventDetail['address']}}
+  <br/>
+  <h4>
+    Link
+  </h4>
+  {{eventDetail['url']}}
+  <br/>
+  <br/>
+  <h4>
+    Start Time
+  </h4>
+  <br/>
+  {{eventDetail['start_time']}}
+  <br/>
+
+
+
+
+
+  <div *ngIf="noEventsRetrieved" class="alert">
+    No Events exist for this search criteria
+  </div>
+
+
+</div>

@@ -22,9 +22,15 @@
       <div class="row">
         <div class="col-lg-9 col-md-9 col-xs-9">
           <!--<a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageFromList['_id'], 'widget']">-->
-          {{eventFromList['title']}}<br/>
-          {{eventFromList['id']}}<br/>
-          <a href="{{eventFromList['url']}}">{{eventFromList['url']}}</a>
+          <a (click) = "displayEventDetail(eventFromList['id'])"> {{eventFromList['title']}}</a><br/>
+<!--<div class="row" *ngIf="displayEventDetails">-->
+  <!--Hello-->
+
+  <!--{{eventFromList['description']}}-->
+          <!--{{eventFromList['start_time']}}-->
+<!--</div>-->
+          <!--{{eventFromList['id']}}<br/>-->
+          <!--<a href="{{eventFromList['url']}}">{{eventFromList['url']}}</a>-->
           <!--</a>-->
           <button (click)="addEventAsInterested(eventFromList)" type="button" class="glyphicon glyphicon-star-empty pull-right">
 
